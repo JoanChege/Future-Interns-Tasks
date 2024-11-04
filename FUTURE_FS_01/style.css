@@ -77,38 +77,32 @@ section {
     text-align: center;
 }
 
-/* About Me Section */
 .about-content {
-    background-color: #f7f7f7; /* Light background */
+    background-color: #f7f7f7; 
     padding: 3em 1em;
-    text-align: left; /* Keep text aligned to the left */
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: column; 
+    align-items: center; 
     max-width: 800px;
     margin: 10px auto;
     font-size: large;
+    text-align: center; /
 }
 
-.dark-mode .about-content {
-    background-color: #969292; /* Dark mode background */
-}
-
-/* Icon and Title Styles */
 .icon-container {
-    background-color: #e0e0e0;
-    border-radius: 50%;
+    background-color: #e0e0e0; 
+    border-radius: 50%; 
     padding: 30px;
-    margin-bottom: 1em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 1em 0; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
 .tech-icon {
-    font-size: 60px;
-    color: #6c757d; /* Adjusted for visibility */
+    font-size: 60px; 
+    color: #6c757d; 
 }
 
 /* Fun Facts List */
@@ -215,9 +209,38 @@ footer {
     margin-top: 2em;
 }
 
-/* Dark Mode Footer */
+/* Dark Mode Styling for Elements */
 .dark-mode footer {
     background-color: #555;
+}
+
+.dark-mode nav a {
+    color: #c1c2eb31;
+}
+.dark-mode #about{
+    background-color: #969292;
+}
+.dark-mode .about-content{
+    background-color: #969292;
+}
+.dark-mode .progress-bar {
+    background-color: rgb(37, 37, 37);
+}
+
+.dark-mode .progress {
+    background-color: rgb(88, 84, 84);
+}
+
+.dark-mode #projects {
+    background-color: #969292;
+}
+
+.dark-mode .project-card {
+    background: linear-gradient(135deg, #444, #555);
+}
+
+.dark-mode .project-card h3, .dark-mode .project-card li {
+    color: #ddd;
 }
 
 /* Media Queries for Responsiveness */
@@ -229,5 +252,6 @@ footer {
         max-width: 60%;
         flex-direction: row;
         gap: 20px;
+        font-size:medium
     }
 }
