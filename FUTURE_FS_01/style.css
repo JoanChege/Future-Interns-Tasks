@@ -1,3 +1,4 @@
+/* Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -9,6 +10,7 @@ body {
     background-color: #f5f5f5;
     color: #333;
     transition: background-color 0.3s, color 0.3s;
+    padding: 70px; /* Adjust padding to avoid content being hidden behind navbar */
 }
 
 /* Dark Mode */
@@ -17,8 +19,8 @@ body.dark-mode {
     color: #f5f5f5;
 }
 
+/* Header and Navbar */
 header {
-    background-color: #ddd;
     padding: 1em;
     text-align: center;
 }
@@ -27,35 +29,100 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: rgba(128, 128, 128, 0.8); /* Grey with transparency */
+    padding: 1em;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+/* Logo */
 .logo {
-width: 50px;
-height: auto;
-margin-right: 20px;
+    width: 50px;
+    height: auto;
+    margin-right: 20px;
+    font-size: 1.5rem;
 }
 
+/* Navigation Links */
 nav a {
     margin: 0 15px;
-    color: #333;
+    color: #333; /* Dark text for light mode */
     text-decoration: none;
     font-weight: bold;
+    transition: color 0.3s;
 }
 
+nav a:hover {
+    color: #c3dbee;
+}
+
+/* Dark Mode Navigation Links */
+.dark-mode nav a {
+    color: #c1c2eb31; /* Light color for dark mode */
+}
+
+/* Theme Toggle Button */
 #theme-toggle {
     padding: 0.5em 1em;
     cursor: pointer;
 }
 
+/* Section Styles */
 section {
     padding: 2em;
     text-align: center;
 }
 
-/* Skills Section Styling */
+/* About Me Section */
+.about-content {
+    background-color: #f7f7f7; /* Light background */
+    padding: 3em 1em;
+    text-align: left; /* Keep text aligned to the left */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 800px;
+    margin: 10px auto;
+    font-size: large;
+}
+
+.dark-mode .about-content {
+    background-color: #969292; /* Dark mode background */
+}
+
+/* Icon and Title Styles */
+.icon-container {
+    background-color: #e0e0e0;
+    border-radius: 50%;
+    padding: 30px;
+    margin-bottom: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tech-icon {
+    font-size: 60px;
+    color: #6c757d; /* Adjusted for visibility */
+}
+
+/* Fun Facts List */
+.fun-facts {
+    margin-top: 1em;
+    list-style-type: none;
+    padding-left: 0;
+    color: #666;
+    font-size: 0.9em;
+}
+
+/* Skills Section */
 .skill {
     margin: 1em 0;
-    text-align: left;
 }
 
 .progress-bar {
@@ -76,10 +143,10 @@ section {
     transition: width 1s ease-in-out;
 }
 
+/* Projects Section */
 #projects {
     background-color: #f9f9f9;
     padding: 3em 0;
-    text-align: center;
 }
 
 #projects h2 {
@@ -133,14 +200,14 @@ section {
     color: #666;
 }
 
-
-
+/* Image Styling */
 img {
     width: 50%;
     height: auto;
     border-radius: 10px;
 }
 
+/* Footer */
 footer {
     text-align: center;
     padding: 1em;
@@ -148,39 +215,19 @@ footer {
     margin-top: 2em;
 }
 
-/* Dark Mode Styling for Elements */
-.dark-mode header,
+/* Dark Mode Footer */
 .dark-mode footer {
     background-color: #555;
 }
 
-.dark-mode nav a {
-    color: #f5f5f5;
-}
-
-.dark-mode .progress-bar {
-    background-color: #444;
-}
-
-.dark-mode .progress {
-    background-color: #888;
-}
-
-.dark-mode #projects {
-    background-color: #333;
-}
-
-.dark-mode .project-card {
-    background: linear-gradient(135deg, #444, #555);
-}
-
-.dark-mode .project-card h3, .dark-mode .project-card li {
-    color: #ddd;
-}
-
-/* Media Queries */
+/* Media Queries for Responsiveness */
 @media (max-width: 768px) {
     img {
         width: 80%;
+    }
+    .about-content {
+        max-width: 60%;
+        flex-direction: row;
+        gap: 20px;
     }
 }
