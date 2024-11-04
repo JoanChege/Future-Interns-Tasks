@@ -89,6 +89,19 @@ section {
     color: rgb(0, 0, 0);
 }
 
+.project ul {
+    list-style-type: none;
+    padding-left: 20px;
+    margin-top: 10px;
+
+}
+
+.project li {
+    margin-bottom: 5px;
+    line-height: 1.5;
+}
+
+
 img {
     width: 50%;
     height: auto;
