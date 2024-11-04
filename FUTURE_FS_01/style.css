@@ -34,7 +34,7 @@ nav {
     left: 0;
     right: 0;
     z-index: 1000;
-    background-color: rgba(128, 128, 128, 0.8); /* Grey with transparency */
+    background-color: rgba(94, 92, 92, 0.8); /* Grey with transparency */
     padding: 1em;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -61,8 +61,13 @@ nav a:hover {
 }
 
 /* Dark Mode Navigation Links */
-.dark-mode nav a {
-    color: #c1c2eb31; /* Light color for dark mode */
+.dark-mode nav a:hover {
+    color: rgb(221, 214, 214); /* Light color for dark mode */
+}
+
+.dark-mode nav{
+    background-color:  rgba(13, 10, 10, 0.9);   
+    color: white;
 }
 
 /* Theme Toggle Button */
@@ -200,18 +205,23 @@ img {
     height: auto;
     border-radius: 10px;
 }
+#contact {
+    text-decoration: none;
+    
+}
 
 /* Footer */
 footer {
     text-align: center;
-    padding: 1em;
+    padding: 4em;
     background-color: #ddd;
-    margin-top: 2em;
+    margin: 0 auto;
 }
 
 /* Dark Mode Styling for Elements */
 .dark-mode footer {
-    background-color: #555;
+    background-color: #444;
+    color: whitesmoke;
 }
 
 .dark-mode nav a {
@@ -249,9 +259,15 @@ footer {
         width: 80%;
     }
     .about-content {
-        max-width: 60%;
-        flex-direction: row;
-        gap: 20px;
+        max-width: 80%;
+        flex-direction: column;
+        gap: 10px;
         font-size:medium
+    }
+    #projects{
+        gap: 10px;
+    }
+    #about{
+        gap: 10px;
     }
 }
