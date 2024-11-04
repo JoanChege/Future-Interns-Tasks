@@ -9,3 +9,12 @@ themeToggle.addEventListener('click', () => {
         themeToggle.innerText = 'Switch to Dark Mode';
     }
 });
+
+// Progress Bar Animation on Page Load
+window.addEventListener('load', () => {
+    const progressBars = document.querySelectorAll('.progress');
+    progressBars.forEach(bar => {
+        const skillLevel = bar.getAttribute('data-skill');
+        bar.style.width = skillLevel;
+    });
+});
