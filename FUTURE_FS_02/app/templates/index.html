@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jstar Designers</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <header>
+    <nav>
+      <p class="logo_name">Jstar Designers.</p>
+      <a href="/">Home</a>
+      <a href="/register">Register</a>
+      <a href="/login">Login</a>
+      <a href="/cart">Cart</a>
+    </nav>
+    <h1>Welcome to Jstar Designers</h1>
+  </header>
+  <section id="products">
+    <h2>Our Latest Collection</h2>
+    <!-- Product listings will be dynamically added by JavaScript -->
+  </section>
+  <footer>
+    &copy; 2024 Jstar Designers
+  </footer>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
