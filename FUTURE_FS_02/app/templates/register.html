@@ -9,10 +9,14 @@
 <body>
   <h2>Register</h2>
   <form action="/register" method="POST">
+    <label for="username">Email:</label>
+    <input type="text" id="email" name="email" required>
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" required>
     <label for="password">Password:</label>
     <input type="password" id="password" name="password" required>
+    <label for="password">Confirm Password:</label>
+    <input type="c_password" id="c_password" name="c_password" required>
     <button type="submit">Register</button>
   </form>
 </body>
