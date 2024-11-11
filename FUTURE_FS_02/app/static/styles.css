@@ -1,0 +1,25 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ebebd7;
+    color: #333;
+  }
+  header {
+    background-color: #d3b8ae;
+    padding: 10px;
+    text-align: center;
+  }
+  h1 {
+    color: #8b5e34;
+  }
+  button {
+    background-color: #e68b4e;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+  }
+  .logo_name{
+    font-weight: bolder;
+    font-size: xx-large;
+    font-style: italic;
+  }
