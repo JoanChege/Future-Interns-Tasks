@@ -1,6 +1,6 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #ebebd7;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background-color: #faf5e4;
     color: #333;
   }
   header {
@@ -12,14 +12,13 @@ body {
     color: #8b5e34;
   }
   button {
-    background-color: #e68b4e;
+    background-color: #8b5e34;
     color: #fff;
     border: none;
     padding: 10px;
     cursor: pointer;
   }
-  .logo_name{
-    font-weight: bolder;
-    font-size: xx-large;
-    font-style: italic;
+  .logo{
+    width: 50px;
+    height: auto;
   }
