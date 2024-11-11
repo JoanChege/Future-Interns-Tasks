@@ -9,19 +9,26 @@
 </head>
 <body>
   <header>
-    <nav>
+    <nav class="nav-bar">
       <img src="{{ url_for('static', filename='jlogo.png') }}" alt="JStar Logo" class="logo">
-      <a href="/">Home</a>
-      <a href="/register">Register</a>
-      <a href="/login">Login</a>
-      <a href="/cart">Cart</a>
+      <ul class="nav-items">
+      <li><a href="/">Home</a></li>
+      <li><a href="/register">Register</a></li>
+      <li><a href="/login">Login</a></li>
+      <li><a href="/cart">Cart</a></li>
+      </ul>
     </nav>
-    <h1>Welcome to JStar Designer</h1>
+    <div class="head">
+      <h1 class="animated-title">JStar Designers: Midpoint of Fashion</h1>
+    <img src="{{ url_for('static', filename='jstar.gif') }}" alt="JStar Gif" class="animated-gif">
+    </div>
   </header>
+
   <section id="products">
     <h2>Our Featured Collection</h2>
     <!-- Product listings will be populated by JavaScript -->
   </section>
+
   <footer>
     &copy; 2024 JStar Designer - Crafted with elegance
   </footer>

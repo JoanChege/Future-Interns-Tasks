@@ -1,24 +1,130 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
 body {
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    background-color: #faf5e4;
-    color: #333;
+  background-color: #faf5e4;
+  color: #333;
+}
+
+header {
+  padding: 10px;
+}
+
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #8b5e34;
+}
+
+.logo {
+  width: 50px;
+  height: auto;
+}
+
+.nav-items {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-items li {
+  margin-right: 20px;
+}
+
+.nav-items a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bolder;
+}
+
+.nav-items a:hover {
+  color: #8b5e34;
+}
+
+/* Header styling for full-screen GIF */
+.head {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* Makes the GIF fill the entire viewport height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.animated-title {
+  font-size: 3em;
+  font-weight: bolder;
+  font-style: italic;
+  color: #8b5e34;
+  animation: fadeInUp 2s ease-out forwards;
+  margin-bottom: 50px; /* Add some space between the heading and the GIF */
+}
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
   }
-  header {
-    background-color: #d3b8ae;
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animated-gif {
+  width: 100%;
+  height: 70%;
+  object-fit: cover;
+  object-position: center;
+}
+
+section {
+  padding: 40px;
+  background-color: #fefaf0; /* Beige background for sections */
+  border-bottom: 2px solid #ddd;
+  text-align: center;
+}
+
+#products h2 {
+  font-size: 1.8em;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+footer {
+  background-color: #8b5e34;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9em;
+  border-top: 2px solid #b1976b; /* Accent color for separation */
+}
+
+button {
+  background-color: #8b5e34;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .nav-items {
+    flex-direction: row;
+    align-items: center;
+  }
+  .nav-items li {
+    margin-bottom: 10px;
+  }
+  section {
     padding: 10px;
-    text-align: center;
   }
-  h1 {
-    color: #8b5e34;
-  }
-  button {
-    background-color: #8b5e34;
-    color: #fff;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-  }
-  .logo{
-    width: 50px;
-    height: auto;
-  }
+}
