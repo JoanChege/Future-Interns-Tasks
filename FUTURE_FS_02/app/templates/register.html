@@ -4,19 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jstar Designers - Register</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='regi_logi.css') }}">
 </head>
 <body>
-  <h2>Register</h2>
+  <img src="{{ url_for('static', filename='jlogo.png') }}" alt="JStar Logo" class="regi-logo">
+  <h2 class="regi">Register</h2>
   <form action="/register" method="POST">
     <label for="username">Email:</label>
-    <input type="text" id="email" name="email" required>
+    <input type="text" id="email" name="email" placeholder="Enter Email" required>
     <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required>
+    <input type="text" id="username" name="username" placeholder="Enter Username" required>
     <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
+    <input type="password" id="password" name="password" placeholder="Enter Password" required>
     <label for="password">Confirm Password:</label>
-    <input type="c_password" id="c_password" name="c_password" required>
+    <input type="c_password" id="c_password" name="c_password" placeholder="Confirm Password" required>
     <button type="submit">Register</button>
   </form>
 </body>
