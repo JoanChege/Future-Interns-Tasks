@@ -3,12 +3,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JStar Designer - Checkout</title>
+  <title>Checkout - JStar Designer</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 </head>
 <body>
-  <h2>Checkout</h2>
-  <p>Your items:</p>
-  <!-- JavaScript can dynamically fill this area with cart items -->
+  <header>
+    <nav class="nav-bar">
+      <img src="{{ url_for('static', filename='jlogo.png') }}" alt="JStar Logo" class="logo">
+      <ul class="nav-items">
+        <li><a href="/">Home</a></li>
+        <li><a href="/register">Register</a></li>
+        <li><a href="/login">Login</a></li>
+        <li><a href="/cart">Cart</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="checkout">
+    <h2>Checkout</h2>
+    <div id="checkout-cart">
+      <!-- Cart items will be displayed here -->
+    </div>
+
+    <form action="/process-order" method="POST">
+      <h3>Shipping Information</h3>
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="address">Shipping Address:</label>
+      <input type="text" id="address" name="address" required>
+
+      <h3>Payment Information</h3>
+      <label for="payment">Payment Method:</label>
+      <select id="payment" name="payment">
+        <option value="credit-card">Credit Card</option>
+        <option value="paypal">PayPal</option>
+        <option value="mpesa">M-Pesa</option> <!-- For local Kenyan users -->
+      </select>
+
+      <button type="submit">Complete Purchase</button>
+    </form>
+  </section>
+
+  <footer>
+    &copy; 2024 JStar Designer - Crafted with elegance
+  </footer>
+
+  <script>
+    // Load cart data from localStorage (or from the server if needed)
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Display cart items in the checkout page
+    function loadCheckoutCart() {
+      const checkoutCartContainer = document.getElementById('checkout-cart');
+      let totalPrice = 0;
+      cart.forEach(item => {
+        const itemDiv = document.createElement('div');
+        itemDiv.innerHTML = `<p>${item.name} - ${item.quantity} x $${item.price}</p>`;
+        checkoutCartContainer.appendChild(itemDiv);
+        totalPrice += item.price * item.quantity;
+      });
+      const totalDiv = document.createElement('div');
+      totalDiv.innerHTML = `<h3>Total: $${totalPrice}</h3>`;
+      checkoutCartContainer.appendChild(totalDiv);
+    }
+
+    // Load the cart when the page loads
+    window.onload = loadCheckoutCart;
+  </script>
 </body>
 </html>
