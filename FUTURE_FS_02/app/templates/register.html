@@ -7,7 +7,9 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='regi_logi.css') }}">
 </head>
 <body>
-  <img src="{{ url_for('static', filename='jlogo.png') }}" alt="JStar Logo" class="regi-logo">
+  <a href="/">
+    <img src="{{ url_for('static', filename='jlogo.png') }}" alt="JStar Logo" class="regi-logo">
+  </a>  
   <h2 class="regi">Register</h2>
   <form action="/register" method="POST">
     <label for="username">Email:</label>
