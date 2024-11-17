@@ -4,12 +4,29 @@ body {
 
 .navbar {
   background-color: black;
+  padding: 0; 
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 /* Add spacing between navbar items */
 .navbar-nav .nav-item {
   margin: 0 15px; /* Adjust spacing as needed */
 }
+
+.navbar-nav .nav-item .nav-link {
+  font-size: 0.9rem; /* Adjust font size for navbar links */
+  padding: 0.5rem; /* Reduce padding for smaller links */
+}
+
+.navbar-brand h1 {
+  font-size: 1.8rem; /* Adjust the font size of the brand/logo text */
+  line-height: 1; /* Ensure text aligns vertically within the navbar */
+  margin: 0; /* Remove extra spacing */
+}
+
 
 /* Adjust icon and text alignment */
 .nav-link i {
@@ -159,6 +176,20 @@ video {
   .navbar-logo {
       font-size: 1.5rem;
   }
+  .navbar {
+    padding: 0.3rem 0.5rem; /* Smaller padding on mobile screens */
+    height: 70px; /* Slightly smaller navbar height */
+  }
+
+  .navbar-brand h1 {
+    font-size: 1.5rem; /* Smaller font size for mobile screens */
+  }
+
+  .navbar-nav .nav-item .nav-link {
+    font-size: 0.8rem; /* Smaller link font size */
+    padding: 0.3rem; /* Smaller padding */
+  }
+
 }
 
 /* Preloader Styles */

@@ -10,7 +10,7 @@ categories = [
     {"name": "Pant and Dress Suits", "image": "suits.jpg"},
     {"name": "Shirt Dress", "image": "shirtdress.jpg"},
     {"name": "Coats", "image": "coats.jpg"},
-    {"name": "Shoes and Panties", "image": "shoes.jpg"}
+    {"name": "Shoes", "image": "shoes.jpg"}
 ]
 
 db.categories.drop()  # Clear existing data
