@@ -1,22 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jstar Designers- Login</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='regi_logi.css') }}">
-</head>
-<body>
-  <a href="/">
-    <img src="{{ url_for('static', filename='jlogo.png') }}" alt="JStar Logo" class="regi-logo">
-  </a>  
-  <h2 class="regi">Login</h2>
-  <form action="/login" method="POST">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" placeholder="Enter Username" required>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" placeholder="Enter Password" required>
-    <button type="submit">Login</button>
-  </form>
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+<h1>Login</h1>
+<form method="POST" action="{{ url_for('login') }}">
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" name="email" class="form-control" id="email" required>
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" name="password" class="form-control" id="password" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>
+<p>Don't have an account? <a href="{{ url_for('register') }}">Register here</a>.</p>
+{% endblock %}
