@@ -29,10 +29,12 @@ db.products.drop()  # Clear existing data
 db.products.insert_many(products)
 
 # Insert a sample user (hashed password for security)
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
+
 
 users = [
-    {"email": "testuser@example.com", "password": generate_password_hash("password123")}
+    {"email": "testuser@example.com", "password": generate_password_hash("password123", method='pbkdf2:sha256')
+}
 ]
 
 db.users.drop()  # Clear existing data
