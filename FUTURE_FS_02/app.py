@@ -1,69 +1,70 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, session
 from pymongo import MongoClient
-import bcrypt
 
 app = Flask(__name__)
-app.secret_key = "joan_jstar_steve_key"  # Secret key for flash messages
+app.secret_key = 'your_secret_key'
 
 # MongoDB setup
-client = MongoClient("mongodb://localhost:27017")
-db = client['JStarDesigner']
-users = db['users']
+client = MongoClient("mongodb://localhost:27017/")
+db = client.jstar_designer
 
-@app.route("/")
+# Home Page
+@app.route('/')
 def index():
-    return render_template("index.html")
+    categories = list(db.categories.find())
+    return render_template('index.html', categories=categories)
 
-@app.route("/register", methods=["POST", "GET"])
-def register():
-    if request.method == "POST":
-        email = request.form["email"]
-        username = request.form["username"]
-        password = request.form["password"]
-        confirm_password = request.form["c_password"]
+# Product Listings
+@app.route('/product/<category>')
+def product(category):
+    products = list(db.products.find({"category": category}))
+    return render_template('product.html', products=products, category=category)
 
-        # Check if passwords match
-        if password != confirm_password:
-            flash("Passwords do not match. Please try again.")
-            return redirect(url_for("register"))
+# Cart
+@app.route('/cart')
+def cart():
+    cart_items = session.get('cart', [])
+    return render_template('cart.html', cart_items=cart_items)
 
-        # Check if email or username already exists
-        if users.find_one({"email": email}):
-            flash("An account with this email already exists.")
-            return redirect(url_for("register"))
-        if users.find_one({"username": username}):
-            flash("Username already taken. Please choose another one.")
-            return redirect(url_for("register"))
+# Add to Cart
+@app.route('/add_to_cart', methods=['POST'])
+def add_to_cart():
+    product_id = request.form.get('product_id')
+    product = db.products.find_one({"_id": ObjectId(product_id)})
+    if 'cart' not in session:
+        session['cart'] = []
+    session['cart'].append(product)
+    session.modified = True
+    return redirect(url_for('cart'))
 
-        # Hash the password
-        hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
-
-        # Insert the new user into the database
-        users.insert_one({"email": email, "username": username, "password": hashed_password})
-        
-        flash("Registration successful! You can now log in.")
-        return redirect(url_for("login"))
-    
-    return render_template("register.html")
-
-@app.route("/login", methods=["POST", "GET"])
+# Login
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == "POST":
-        username = request.form["username"]
-        password = request.form["password"]
-
-        # Find user by username
-        user = users.find_one({"username": username})
-
-        # Validate password
-        if user and bcrypt.checkpw(password.encode('utf-8'), user["password"]):
-            flash("Login successful!")
-            return redirect(url_for("index"))
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+        user = db.users.find_one({"email": email, "password": password})
+        if user:
+            session['user'] = user['email']
+            return redirect(url_for('index'))
         else:
-            flash("Invalid username or password. Please try again.")
-            return redirect(url_for("login"))
+            return "Invalid login credentials"
+    return render_template('login.html')
 
-    return render_template("login.html")
+# Register
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+        db.users.insert_one({"email": email, "password": password})
+        return redirect(url_for('login'))
+    return render_template('register.html')
 
-if __name__ == "__main__":
+# Checkout
+@app.route('/checkout')
+def checkout():
+    return render_template('checkout.html')
+
+if __name__ == '__main__':
     app.run(debug=True)
