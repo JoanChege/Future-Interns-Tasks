@@ -1,42 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JStar Designers - Home</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-</head>
-<body>
-  <header>
-    <nav class="nav-bar">
-      <img src="{{ url_for('static', filename='jlogo.png') }}" alt="JStar Logo" class="logo">
-      <ul class="nav-items">
-        <li><a href="/">Home</a></li>
-        <li><a href="/register">Register</a></li>
-        <li><a href="/login">Login</a></li>
-        <li><a href="/cart">Cart</a></li>
-      </ul>
-    </nav>
-    
-    <div class="head">
-      <img src="{{ url_for('static', filename='jstar2.gif') }}" alt="JStar Title Gif" class="title-gif">
-      
-      <video autoplay muted loop class="background-video">
-        <source src="{{ url_for('static', filename='jstar designers2.mp4') }}" type="video/mp4">
-      </video>
+{% extends "base.html" %}
+{% block content %}
+<h1>Welcome to JSTAR Designers</h1>
+<div class="row">
+    {% for category in categories %}
+    <div class="col-md-4">
+        <div class="card">
+            <img src="{{ url_for('static', filename='images/' + category.image) }}" class="card-img-top" alt="{{ category.name }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ category.name }}</h5>
+                <a href="{{ url_for('product', category=category.name) }}" class="btn btn-primary">Shop Now</a>
+            </div>
+        </div>
     </div>
-  </header>
+    {% endfor %}
+</div>
+<img src="{{ url_for('static', filename='images/jstar2.gif') }}" alt="Gif" style="height: 80px;">
 
-  <section id="products">
-    <h2>Our Featured Collection</h2>
-    <!-- Product listings will be populated by JavaScript -->
-  </section>
-
-  <footer>
-    &copy; 2024 JStar Designers - Crafted with elegance
-  </footer>
-  
-  <script src="{{ url_for('static', filename='app.js') }}"></script>
-</body>
-</html>
+{% endblock %}
