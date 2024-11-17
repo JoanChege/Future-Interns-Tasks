@@ -1,19 +1,27 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Welcome to JSTAR Designers</h1>
+
 <div class="row">
+        <!-- Video Above Products -->
+        <div class="video-container mb-3">
+            <video class="w-100" autoplay loop muted>
+                <source src="{{ url_for('static', filename='images/jstar1.mp4') }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
     {% for category in categories %}
-    <div class="col-md-4">
-        <div class="card">
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm" style="background-color: transparent; box-shadow: 0 4px 8px rgba(255, 223, 186, 0.8);">
             <img src="{{ url_for('static', filename='images/' + category.image) }}" class="card-img-top" alt="{{ category.name }}">
             <div class="card-body">
-                <h5 class="card-title">{{ category.name }}</h5>
-                <a href="{{ url_for('product', category=category.name) }}" class="btn btn-primary">Shop Now</a>
+                <h5 class="card-title text-dark">{{ category.name }}</h5>
+                <a href="{{ url_for('product', category=category.name) }}" class="btn" style="background-color: beige; color: burlywood;">Shop Now</a>
             </div>
         </div>
     </div>
+
     {% endfor %}
 </div>
-<img src="{{ url_for('static', filename='images/jstar2.gif') }}" alt="Gif" style="height: 80px;">
 
 {% endblock %}

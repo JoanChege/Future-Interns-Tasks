@@ -1,6 +1,5 @@
 body {
-  background-color: #f8f9fa;
-  color: #212529;
+  background-color: rgb(161, 133, 98);
 }
 
 .navbar {
@@ -12,10 +11,74 @@ body {
 }
 
 .card {
-  border: none;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: transparent;
+  box-shadow: 0 4px 8px rgba(255, 223, 186, 0.7); /* Transparent beige shadow */
 }
 
 .card-title {
-  color: gold;
+  color: burlywood;
+}
+
+.btn {
+  background-color: gold;
+  color: black;
+  border: none;
+  text-align: center;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #b58c00; /* Darker gold on hover */
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+/* Styling for the navbar logo heading */
+.navbar-logo {
+  font-family: 'Roboto', sans-serif; /* Set the font */
+  font-weight: bold; /* Make it bold */
+  font-size: 30px; /* Adjust font size */
+  color: burlywood; /* Set text color */
+  margin: 0; /* Remove any margin around the heading */
+  letter-spacing: 2px; /* Increase letter spacing */
+  transition: color 0.3s ease-in-out; /* Smooth color transition */
+}
+
+/* Add hover effect for logo */
+.navbar-logo:hover {
+  color: rgb(166, 133, 48); /* Change color on hover */
+}
+
+/* Make sure the logo fits well within the navbar */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Align to the left */
+}
+
+/* Optional: Add some spacing on the left and right */
+.navbar-brand h1 {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* Styling for the GIF */
+.container img {
+  display: block; /* Removes the inline display and avoids extra space */
+  width: 100%; /* Make the image span the full width of the container */
+  margin-bottom: 20px; /* Adjust the space below the image */
+  opacity: 0.8; /* Makes the image slightly transparent (adjust as needed) */
+  border: none; /* Removes any border around the image */
+  background-color: transparent; /* Ensures background is transparent */
+}
+
+/* Optional: Add a hover effect to slightly change opacity */
+.container img:hover {
+  opacity: 0.8; /* Makes the image fully visible when hovered */
 }
