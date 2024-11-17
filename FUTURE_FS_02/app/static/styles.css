@@ -5,20 +5,20 @@
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-/* Color Palette */
+/* General color palette */
 :root {
   --primary-color: #0a1f44; /* Dark Navy Blue */
   --secondary-color: #cba135; /* Soft Gold */
   --accent-color: #f5f5f5; /* Light Cream */
-  --text-color: #333; /* Standard dark text */
+  --text-color: #333;
 }
 
-/* Body and Basic Styling */
 body {
-  background-color: var(--accent-color); /* Light Cream background */
+  background-color: var(--accent-color);
   color: var(--text-color);
 }
 
+/* Header */
 header {
   padding: 10px;
 }
@@ -28,7 +28,7 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background-color: var(--primary-color); /* Dark Navy Blue background */
+  background-color: var(--primary-color);
 }
 
 .logo {
@@ -49,19 +49,19 @@ header {
 
 .nav-items a {
   text-decoration: none;
-  color: var(--accent-color); /* Light Cream for nav links */
+  color: var(--accent-color);
   font-weight: bolder;
 }
 
 .nav-items a:hover {
-  color: var(--secondary-color); /* Soft Gold on hover */
+  color: var(--secondary-color);
 }
 
-/* Header styling for full-screen GIF */
+/* Full-screen background video */
 .head {
   position: relative;
   width: 100%;
-  height: 100vh; /* Full viewport height */
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -69,58 +69,49 @@ header {
   overflow: hidden;
 }
 
-.animated-title {
-  font-size: 3em;
-  font-weight: bolder;
-  font-style: italic;
-  color: var(--secondary-color); /* Soft Gold title */
-  animation: fadeInUp 2s ease-out forwards;
-  margin-bottom: 50px; /* Add space between heading and GIF */
-}
-
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(50px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animated-gif {
+/* Video styling */
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 70%;
+  height: 100%;
   object-fit: cover;
-  object-position: center;
+  z-index: -1; /* Place behind other elements */
+}
+
+/* Title GIF styling */
+.title-gif {
+  max-width: 50%;
+  margin-bottom: 20px;
+  z-index: 1; /* Place above the video */
 }
 
 section {
   padding: 40px;
-  background-color: var(--accent-color); /* Light Cream for sections */
+  background-color: var(--accent-color);
   border-bottom: 2px solid #ddd;
   text-align: center;
 }
 
 #products h2 {
   font-size: 1.8em;
-  color: var(--primary-color); /* Dark Navy Blue text */
+  color: var(--primary-color);
   margin-bottom: 20px;
 }
 
 footer {
-  background-color: var(--primary-color); /* Dark Navy Blue background */
-  color: var(--accent-color); /* Light Cream text */
+  background-color: var(--primary-color);
+  color: var(--accent-color);
   text-align: center;
   padding: 20px;
   font-size: 0.9em;
-  border-top: 2px solid var(--secondary-color); /* Soft Gold for separation */
+  border-top: 2px solid var(--secondary-color);
 }
 
 button {
-  background-color: var(--secondary-color); /* Soft Gold button */
-  color: var(--accent-color); /* Light Cream text */
+  background-color: var(--secondary-color);
+  color: var(--accent-color);
   border: none;
   padding: 10px;
   cursor: pointer;

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JStar Designer - Home</title>
+  <title>JStar Designers - Home</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
   <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 </head>
@@ -12,15 +12,19 @@
     <nav class="nav-bar">
       <img src="{{ url_for('static', filename='jlogo.png') }}" alt="JStar Logo" class="logo">
       <ul class="nav-items">
-      <li><a href="/">Home</a></li>
-      <li><a href="/register">Register</a></li>
-      <li><a href="/login">Login</a></li>
-      <li><a href="/cart">Cart</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/register">Register</a></li>
+        <li><a href="/login">Login</a></li>
+        <li><a href="/cart">Cart</a></li>
       </ul>
     </nav>
+    
     <div class="head">
-      <h1 class="animated-title">JStar Designers: Midpoint of Fashion</h1>
-    <img src="{{ url_for('static', filename='jstar.gif') }}" alt="JStar Gif" class="animated-gif">
+      <img src="{{ url_for('static', filename='jstar2.gif') }}" alt="JStar Title Gif" class="title-gif">
+      
+      <video autoplay muted loop class="background-video">
+        <source src="{{ url_for('static', filename='jstar designers2.mp4') }}" type="video/mp4">
+      </video>
     </div>
   </header>
 
@@ -30,8 +34,9 @@
   </section>
 
   <footer>
-    &copy; 2024 JStar Designer - Crafted with elegance
+    &copy; 2024 JStar Designers - Crafted with elegance
   </footer>
+  
   <script src="{{ url_for('static', filename='app.js') }}"></script>
 </body>
 </html>
