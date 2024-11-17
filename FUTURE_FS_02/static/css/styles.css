@@ -4,6 +4,7 @@ body {
 
 .navbar {
   background-color: black;
+  justify-content: space-between;
 }
 
 .navbar-brand img {
