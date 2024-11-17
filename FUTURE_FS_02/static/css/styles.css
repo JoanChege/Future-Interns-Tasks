@@ -57,7 +57,6 @@ img {
   font-weight: bolder;
   color: rgba(237, 174, 101, 0.823); /* Goldish color */
   margin: 0;
-  padding: 0;
 }
 
 .navbar-logo .period {
@@ -135,6 +134,9 @@ video {
   color: #ffffff; /* Ensure text is white */
   margin-top: 10px; /* Add spacing above */
 }
+.text-white #number a:hover{
+  color: burlywood !important;
+}
 
 .text-white a {
   text-decoration: none; /* Remove underlines */
@@ -149,6 +151,7 @@ video {
 
 .text-white i {
   margin-right: 5px; /* Space between icon and text */
+  color: burlywood !important;
 }
 
 
@@ -191,4 +194,27 @@ video {
 /* Hide content initially */
 #main-content {
   display: none;
+}
+
+.text-burlywood {
+  color: burlywood !important;
+}
+ 
+.category-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-card:hover {
+  transform: scale(1.05); /* Slightly enlarge the card */
+  box-shadow: 0 6px 12px rgba(255, 223, 186, 1); /* Add a stronger shadow */
+  background-color: rgba(255, 255, 255, 0.9); /* Slightly opaque background */
+}
+
+.category-card:hover .card-title {
+  color: burlywood; /* Change the text color on hover */
+}
+
+.category-card:hover .btn {
+  background-color: burlywood; /* Change button color on hover */
+  color: white; /* Change button text color */
 }
