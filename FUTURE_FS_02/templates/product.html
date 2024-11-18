@@ -9,6 +9,16 @@
             <div class="card-body">
                 <h5 class="card-title">{{ product.name }}</h5>
                 <p class="card-text">Price: Ksh {{ product.price }}</p>
+                
+                <!-- Additional details -->
+                {% if product.sizes %}
+                <p class="card-text"><strong>Available Sizes:</strong> {{ product.sizes | join(', ') }}</p>
+                {% endif %}
+                
+                {% if product.types %}
+                <p class="card-text"><strong>Type:</strong> {{ product.types | join(', ') }}</p>
+                {% endif %}
+
                 <form method="POST" action="{{ url_for('add_to_cart') }}">
                     <input type="hidden" name="product_id" value="{{ product._id }}">
                     <button type="submit" class="btn btn-primary">Add to Cart</button>
