@@ -24,7 +24,7 @@ products = [
         "category": "Dresses",
         "price": 4500,
         "image": "reddress.jpg",
-        "sizes": ["Small", "Medium", "Large", "Xlarge", "XXL"],
+        "sizes": ["XS","S", "M", "L", "X", "XXL"],
         "types": ["Long Sleeve", "Short Sleeve"],
         "types_length": ["Long", "Short"]
     },
@@ -33,14 +33,15 @@ products = [
         "category": "Suits",
         "price": 5000,
         "image": "blacksuit.jpg",
-        "sizes": ["Medium", "Large"]
+        "sizes": ["XS","S", "M", "L", "X", "XXL"],
+        "types": []
     },
     {
         "name": "Casual Shirt Dress",
         "category": "Shirt Dress",
         "price": 3000,
         "image": "blueshirtdress.jpg",
-        "sizes": ["Small", "Medium"],
+        "sizes": ["XS","S", "M", "L", "X", "XXL"],
         "types": ["Short Sleeve"]
     },
     {
@@ -48,7 +49,7 @@ products = [
         "category": "Coats",
         "price": 8000,
         "image": "coats.jpg",
-        "sizes": ["Large", "XL"]
+        "sizes": ["XS","S", "M", "L", "X", "XXL"],
     },
     {
         "name": "Stylish Heels",
@@ -64,6 +65,7 @@ products = [
         "category": "Shoes and Panties",
         "price": 1000,
         "image": "panties.jpg",
+        "sizes": ["XS","S", "M", "L", "X", "XXL"],
         "types": ["Brazilian", "Cotton", "Laced"]
     }
 ]
