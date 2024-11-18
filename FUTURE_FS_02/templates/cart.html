@@ -1,36 +1,56 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Your Cart</h1>
-<div class="row">
-    {% for item in cart_items %}
-    <div class="col-md-4">
-        <div class="card mb-4">
-            <img src="{{ url_for('static', filename='images/' + item.image) }}" class="card-img-top" alt="{{ item.name }}">
-            <div class="card-body">
-                <h5 class="card-title">{{ item.name }}</h5>
-                <p class="card-text">Price: Ksh {{ item.price }}</p>
-                <p class="card-text">Quantity: {{ item.quantity }}</p>
 
-                <!-- Increase Quantity -->
-                <form method="POST" action="{{ url_for('add_to_cart') }}">
-                    <input type="hidden" name="product_id" value="{{ item._id }}">
-                    <button type="submit" class="btn btn-success">Increase Quantity</button>
-                </form>
+<!-- Cart Table -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Size</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if cart_items %}
+            {% for item in cart_items %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.size }}</td>
+                <td>{{ item.type }}</td>
+                <td>Ksh {{ item.price }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>Ksh {{ item.price * item.quantity }}</td>
+                <td>
+                    <!-- Increase Quantity -->
+                    <form method="POST" action="{{ url_for('add_to_cart') }}" style="display:inline;">
+                        <input type="hidden" name="product_id" value="{{ item._id }}">
+                        <button type="submit" class="btn btn-success">Increase Quantity</button>
+                    </form>
+                    <!-- Decrease Quantity -->
+                    <a href="{{ url_for('decrease_quantity', product_id=item._id) }}" class="btn btn-warning">Decrease Quantity</a>
+                    <!-- Remove from Cart -->
+                    <a href="{{ url_for('remove_from_cart', product_id=item._id) }}" class="btn btn-danger">Remove</a>
+                </td>
+            </tr>
+            {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="7" class="text-center">Cart is Empty!</td>
+        </tr>
+        {% endif %}
+    </tbody>
+</table>
 
-                <!-- Decrease Quantity -->
-                <a href="{{ url_for('decrease_quantity', product_id=item._id) }}" class="btn btn-warning">Decrease Quantity</a>
-
-                <!-- Remove from Cart -->
-                <a href="{{ url_for('remove_from_cart', product_id=item._id) }}" class="btn btn-danger">Remove</a>
-            </div>
-        </div>
-    </div>
-    <a href="{{ url_for('checkout') }}" class="btn btn-success">Proceed to Checkout</a>
-    {% endfor %}
-</div>
-{% if not cart_items %}
-<p>Cart is Empty!</p>
-    <a href="{{ url_for('index') }}" class="btn btn-primary">Continue Shopping</a>
+<!-- Checkout Button -->
+{% if cart_items %}
+<a href="{{ url_for('checkout') }}" class="btn btn-success">Proceed to Checkout</a>
+{% else %}
+<a href="{{ url_for('index') }}" class="btn btn-primary">Continue Shopping</a>
 {% endif %}
 
 {% endblock %}

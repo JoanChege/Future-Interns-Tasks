@@ -41,29 +41,47 @@ def cart():
 @app.route('/add_to_cart', methods=['POST'])
 def add_to_cart():
     product_id = request.form.get('product_id')  # Get product ID from form
+    size = request.form.get('size')  # Get size from form
+    type_ = request.form.get('type')  # Get type from form
+
     try:
-        product = db.products.find_one({"_id": ObjectId(product_id)})  # Find product by ObjectId
+        # Find product by ObjectId
+        product = db.products.find_one({"_id": ObjectId(product_id)})
         if not product:
             return "Product not found", 404  # Handle case if product is not found
 
+        # Validate if the size and type are available for the product
+        if size not in product['available_sizes']:
+            return f"Size '{size}' not available for this product", 400  # Size validation
+
+        if type_ not in product['available_types']:
+            return f"Type '{type_}' not available for this product", 400  # Type validation
+
         # Convert ObjectId to string before storing it in the session
-        product['_id'] = str(product['_id'])  # This converts the ObjectId to string
+        product['_id'] = str(product['_id'])  # Convert ObjectId to string
 
         # Initialize the cart if it doesn't exist in the session
         if 'cart' not in session:
             session['cart'] = []
-            
-        # Check if the product is already in the cart
+
+        # Check if the product with the same size and type is already in the cart
         for item in session['cart']:
-            if item['_id'] == product['_id']:
-                item['quantity'] += 1  # If product exists, increase the quantity
+            if item['_id'] == product['_id'] and item.get('size') == size and item.get('type') == type_:
+                item['quantity'] += 1  # If product exists with same size/type, increase the quantity
                 session.modified = True
                 return redirect(url_for('cart'))
 
+        # Add size, type, and quantity to the product data
+        product['size'] = size
+        product['type'] = type_
         product['quantity'] = 1
-        session['cart'].append(product)  # Add the product to the cart
+
+        # Add the product to the cart
+        session['cart'].append(product)
         session.modified = True  # Mark the session as modified
+
         return redirect(url_for('cart'))  # Redirect to the cart page
+
     except Exception as e:
         return f"Error: {str(e)}", 500  # Error handling for invalid ObjectId or database errors
 
