@@ -10,22 +10,32 @@
                 <h5 class="card-title">{{ product.name }}</h5>
                 <p class="card-text">Price: Ksh {{ product.price }}</p>
                 
-                <!-- Additional details -->
-                {% if product.sizes %}
-                <p class="card-text"><strong>Available Sizes:</strong> {{ product.sizes | join(', ') }}</p>
-                {% endif %}
-                
-                {% if product.types %}
-                <p class="card-text"><strong>Type:</strong> {{ product.types | join(', ') }}</p>
-                {% endif %}
-
+                <!-- Dropdown for type or size selection -->
                 <form method="POST" action="{{ url_for('add_to_cart') }}">
                     <input type="hidden" name="product_id" value="{{ product._id }}">
-                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                    
+                    {% if product.sizes %}
+                    <label for="size">Select Size:</label>
+                    <select name="size" id="size" class="form-control" required>
+                        {% for size in product.sizes %}
+                        <option value="{{ size }}">{{ size }}</option>
+                        {% endfor %}
+                    </select>
+                    {% endif %}
+                    
+                    {% if product.types %}
+                    <label for="type">Select Type:</label>
+                    <select name="type" id="type" class="form-control" required>
+                        {% for type in product.types %}
+                        <option value="{{ type }}">{{ type }}</option>
+                        {% endfor %}
+                    </select>
+                    {% endif %}
+                    
+                    <button type="submit" class="btn btn-primary mt-3">Add to Cart</button>
                 </form>
             </div>
         </div>
     </div>
     {% endfor %}
-</div>
-{% endblock %}
+    
