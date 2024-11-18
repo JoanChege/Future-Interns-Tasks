@@ -7,22 +7,65 @@ db = client['jstar_designer']
 # Insert categories
 categories = [
     {"name": "Dresses", "image": "dresses.jpg"},
-    {"name": "Pant and Dress Suits", "image": "suits.jpg"},
+    {"name": "Suits", "image": "suits.jpg"},
     {"name": "Shirt Dress", "image": "shirtdress.jpg"},
     {"name": "Coats", "image": "coats.jpg"},
-    {"name": "Shoes", "image": "shoes.jpg"}
+    {"name": "Shoes", "image": "shoes.jpg"},
+    {"name": "Panties", "image": "panties.jpg"}
 ]
 
 db.categories.drop()  # Clear existing data
 db.categories.insert_many(categories)
 
-# Insert sample products
+# Insert sample products with sizes and types
 products = [
-    {"name": "Red Evening Dress", "category": "Dresses", "price": 4500, "image": "reddress.jpg"},
-    {"name": "Blue Office Suit", "category": "Pant and Dress Suits", "price": 5000, "image": "blacksuit.jpg"},
-    {"name": "Casual Shirt Dress", "category": "Shirt Dress", "price": 3000, "image": "blueshirtdress.jpg"},
-    {"name": "Winter Long Coat", "category": "Coats", "price": 8000, "image": "coat.jpg"},
-    {"name": "Stylish Heels", "category": "Shoes and Panties", "price": 3500, "image": "heels.jpg"}
+    {
+        "name": "Red Evening Dress",
+        "category": "Dresses",
+        "price": 4500,
+        "image": "reddress.jpg",
+        "sizes": ["Small", "Medium", "Large", "Xlarge", "XXL"],
+        "types": ["Long Sleeve", "Short Sleeve"],
+        "types_length": ["Long", "Short"]
+    },
+    {
+        "name": "Blue Office Suit",
+        "category": "Suits",
+        "price": 5000,
+        "image": "blacksuit.jpg",
+        "sizes": ["Medium", "Large"]
+    },
+    {
+        "name": "Casual Shirt Dress",
+        "category": "Shirt Dress",
+        "price": 3000,
+        "image": "blueshirtdress.jpg",
+        "sizes": ["Small", "Medium"],
+        "types": ["Short Sleeve"]
+    },
+    {
+        "name": "Winter Long Coat",
+        "category": "Coats",
+        "price": 8000,
+        "image": "coats.jpg",
+        "sizes": ["Large", "XL"]
+    },
+    {
+        "name": "Stylish Heels",
+        "category": "Shoes",
+        "price": 3500,
+        "image": "heels.jpg",
+        "sizes": ["37", "38", "39", "40"],
+        "types": ["Pointy Heel", "Blocked Heel"],
+        "types_length": ["Long Heel", "Short Heel"]
+    },
+    {
+        "name": "Brazilian Panties",
+        "category": "Shoes and Panties",
+        "price": 1000,
+        "image": "panties.jpg",
+        "types": ["Brazilian", "Cotton", "Laced"]
+    }
 ]
 
 db.products.drop()  # Clear existing data
