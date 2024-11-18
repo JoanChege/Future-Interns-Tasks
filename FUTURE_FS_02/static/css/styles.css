@@ -19,6 +19,19 @@ body {
   justify-content: space-between;
 }
 
+/* Ensure navbar toggler button is responsive */
+.navbar-toggler {
+  border: none; /* Remove border for cleaner look */
+  padding: 0.25rem 0.5rem; /* Adjust padding for better sizing */
+  background-color: transparent; /* Make the background transparent */
+}
+
+/* Icon size adjustment for mobile screens */
+.navbar-toggler-icon {
+  background-image: url('data:image/svg+xml,%3csvg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"%3e%3cpath stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 7h22M4 15h22M4 23h22"%3e%3c/path%3e%3c/svg%3e'); /* Ensures appropriate icon size */
+}
+
+
 /* Add spacing between navbar items */
 .navbar-nav .nav-item {
   margin: 0 15px; /* Adjust spacing as needed */
@@ -181,6 +194,9 @@ video {
 
 
 @media (max-width: 768px) {
+  .navbar-toggler {
+      font-size: 1.5rem; /* Adjust the toggler button size on smaller screens */
+    }
   .navbar-logo {
       font-size: 1.5rem;
   }
@@ -312,5 +328,12 @@ footer {
 @media (max-width: 576px) {
   .login-box {
     padding: 2rem 1rem;
+  }
+  .navbar-nav {
+    text-align: center; /* Center navbar items for smaller screens */
+  }
+
+  .navbar-nav .nav-item {
+    margin: 5px 0; /* Adjust margin between items */
   }
 }
