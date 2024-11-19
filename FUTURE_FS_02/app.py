@@ -1,7 +1,10 @@
-from flask import Flask, render_template, request, redirect, url_for, session, jsonify
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify, flash
+from flask_mail import Mail, Message
+import requests
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 import json
+
 
 # Custom JSON encoder for handling ObjectId serialization
 class CustomJsonEncoder(json.JSONEncoder):
@@ -14,6 +17,15 @@ class CustomJsonEncoder(json.JSONEncoder):
 app = Flask(__name__)
 app.secret_key = 'your_paco_key_is_here'  # Set a secure key for session handling
 app.json_encoder = CustomJsonEncoder  # Use custom JSON encoder
+
+# Configure Flask-Mail
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'your_email@gmail.com'
+app.config['MAIL_PASSWORD'] = 'your_email_password'
+mail = Mail(app)
+
 
 # MongoDB setup
 client = MongoClient("mongodb://localhost:27017/")  # Connect to MongoDB
@@ -132,10 +144,58 @@ def register():
         return redirect(url_for('login'))  # Redirect to login page after registration
     return render_template('register.html')  # Render register page if it's a GET request
 
-# Checkout Route
-@app.route('/checkout')
+@app.route('/checkout', methods=['GET', 'POST'])
 def checkout():
-    return render_template('checkout.html')  # Render the checkout page
+    return render_template('checkout.html')
+
+@app.route('/process_checkout', methods=['POST'])
+def process_checkout():
+    payment_method = request.form.get('payment_method')
+    user_email = 'user_email@example.com'  # Replace with the logged-in user's email
+
+    if payment_method == 'visa':
+        card_number = request.form.get('card_number')
+        expiry_date = request.form.get('expiry_date')
+        cvv = request.form.get('cvv')
+        # Mock Visa payment processing (use an actual payment gateway in production)
+        if card_number and expiry_date and cvv:
+            flash('Payment successful via Visa!', 'success')
+            send_receipt(user_email)
+        else:
+            flash('Payment failed. Please check your Visa details.', 'danger')
+
+    elif payment_method == 'mpesa':
+        phone = request.form.get('phone')
+        # Mock M-Pesa payment processing
+        if phone:
+            # Simulate sending payment prompt (API call to Safaricom)
+            response = requests.post('https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest', json={
+                'BusinessShortCode': '174379',
+                'Password': 'your_encoded_password',
+                'Timestamp': '20240101120000',
+                'TransactionType': 'CustomerPayBillOnline',
+                'Amount': '1',  # Mock amount
+                'PartyA': phone,
+                'PartyB': '174379',
+                'PhoneNumber': phone,
+                'CallBackURL': 'https://yourdomain.com/callback',
+                'AccountReference': 'JSTAR Designers',
+                'TransactionDesc': 'Payment'
+            }, headers={'Authorization': 'Bearer your_access_token'})
+            if response.status_code == 200:
+                flash('Payment prompt sent via M-Pesa!', 'success')
+                send_receipt(user_email)
+            else:
+                flash('Payment failed. Please check your phone number.', 'danger')
+        else:
+            flash('Phone number is required for M-Pesa payment.', 'danger')
+
+    return redirect(url_for('checkout'))
+
+def send_receipt(email):
+    msg = Message('Payment Receipt', sender='your_email@gmail.com', recipients=[email])
+    msg.body = 'Thank you for your payment! Your order is confirmed.'
+    mail.send(msg)
 
 # Run the application
 if __name__ == '__main__':
