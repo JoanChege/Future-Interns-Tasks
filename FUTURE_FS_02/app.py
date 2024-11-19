@@ -148,13 +148,19 @@ def login():
 
         # Retrieve user by email
         user_data = db.users.find_one({"email": email})
-        if user_data and check_password_hash(user_data['password'], password):
-            user = User(id=str(user_data['_id']), email=user_data['email'])
-            login_user(user)  # Store user in session
-            flash('Login successful!', 'success')
-            return redirect(url_for('index'))  # Redirect to homepage after login
+        
+        #Check if user exists and password matches
+        if user_data:
+            if check_password_hash(user_data['password'], password):
+                user = User(id=str(user_data['_id']), email=user_data['email'])
+                login_user(user)  # Store user in session
+                flash('Login successful!', 'success')
+                return redirect(url_for('index'))  # Redirect to homepage after login
+            else:
+                flash('Invalid password.', 'danger')  # Password mismatch
         else:
-            flash('Invalid email or password.', 'danger')
+            flash('User not found.', 'danger')  # Email not found
+
 
     return render_template('login.html')
 
@@ -190,7 +196,7 @@ def register():
             return redirect(url_for('login'))
 
         # Hash the password before saving
-        hashed_password = generate_password_hash(password, method='sha256')
+        hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
 
         db.users.insert_one({"email": email, "password": hashed_password})
         flash('Registration successful! You can now log in.', 'success')
