@@ -4,7 +4,7 @@ from flask_login import LoginManager, UserMixin, login_user, logout_user, login_
 import requests
 from pymongo import MongoClient
 from bson.objectid import ObjectId
-from werkzeug.security import check_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 import json
 
 
@@ -152,7 +152,7 @@ def login():
             user = User(id=str(user_data['_id']), email=user_data['email'])
             login_user(user)  # Store user in session
             flash('Login successful!', 'success')
-            return redirect(url_for('index'))
+            return redirect(url_for('index'))  # Redirect to homepage after login
         else:
             flash('Invalid email or password.', 'danger')
 
@@ -189,11 +189,15 @@ def register():
             flash('User already exists. Please log in.', 'warning')
             return redirect(url_for('login'))
 
-        db.users.insert_one({"email": email, "password": password})
-        flash('Registration successful! Please log in.', 'success')
-        return redirect(url_for('login'))
+        # Hash the password before saving
+        hashed_password = generate_password_hash(password, method='sha256')
+
+        db.users.insert_one({"email": email, "password": hashed_password})
+        flash('Registration successful! You can now log in.', 'success')
+        return redirect(url_for('login'))  # Redirect to login page after registration
 
     return render_template('register.html')
+
 
 
 @app.route('/checkout', methods=['GET', 'POST'])
