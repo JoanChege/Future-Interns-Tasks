@@ -31,10 +31,10 @@
                     <!-- Increase Quantity -->
                     <form method="POST" action="{{ url_for('add_to_cart') }}" style="display:inline;">
                         <input type="hidden" name="product_id" value="{{ item._id }}">
-                        <button type="submit" class="btn btn-success">Increase Quantity</button>
+                        <button type="submit" class="btn btn-success">+</button>
                     </form>
                     <!-- Decrease Quantity -->
-                    <a href="{{ url_for('decrease_quantity', product_id=item._id) }}" class="btn btn-warning">Decrease Quantity</a>
+                    <a href="{{ url_for('decrease_quantity', product_id=item._id) }}" class="btn btn-warning">-</a>
                     <!-- Remove from Cart -->
                     <a href="{{ url_for('remove_from_cart', product_id=item._id) }}" class="btn btn-danger">Remove</a>
                 </td>
