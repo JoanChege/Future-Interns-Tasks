@@ -12,7 +12,7 @@ body {
 
 .navbar {
   background-color: black;
-  padding: 0; 
+  padding: 0px; 
   height: 70px;
   display: flex;
   align-items: center;

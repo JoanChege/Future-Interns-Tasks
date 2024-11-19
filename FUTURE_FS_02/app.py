@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify, flash
 from flask_mail import Mail, Message
+from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 import requests
 from pymongo import MongoClient
 from bson.objectid import ObjectId
+from werkzeug.security import check_password_hash
 import json
 
 
@@ -17,6 +19,24 @@ class CustomJsonEncoder(json.JSONEncoder):
 app = Flask(__name__)
 app.secret_key = 'your_paco_key_is_here'  # Set a secure key for session handling
 app.json_encoder = CustomJsonEncoder  # Use custom JSON encoder
+login_manager = LoginManager(app)
+login_manager.login_view = 'login'  # Redirects unauthorized users to login page
+login_manager.login_message = "Please log in to access this page."
+
+# Example User class
+class User(UserMixin):
+    def __init__(self, id, email):
+        self.id = id  # MongoDB `_id` (converted to string)
+        self.email = email
+
+    def get_id(self):
+        return self.id  # Must return the unique identifier for the user
+
+users = {
+    '1': User(id='1', email='user@example.com'),
+}  # Replace with database logic
+
+
 
 # Configure Flask-Mail
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
@@ -51,6 +71,7 @@ def cart():
 
 # Add to Cart Route
 @app.route('/add_to_cart', methods=['POST'])
+@login_required
 def add_to_cart():
     product_id = request.form.get('product_id')  # Get product ID from form
     size = request.form.get('size')  # Get size from form
@@ -61,8 +82,6 @@ def add_to_cart():
         product = db.products.find_one({"_id": ObjectId(product_id)})
         if not product:
             return "Product not found", 404  # Handle case if product is not found
-
-
 
         # Convert ObjectId to string before storing it in the session
         product['_id'] = str(product['_id'])  # Convert ObjectId to string
@@ -123,28 +142,62 @@ def decrease_quantity(product_id):
 # Login Route
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == 'POST':  # If the request method is POST (form submission)
-        email = request.form.get('email')  # Get email from form
-        password = request.form.get('password')  # Get password from form
-        user = db.users.find_one({"email": email, "password": password})  # Check if user exists
-        if user:
-            session['user'] = user['email']  # Store user email in session
-            return redirect(url_for('index'))  # Redirect to the home page
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        # Retrieve user by email
+        user_data = db.users.find_one({"email": email})
+        if user_data and check_password_hash(user_data['password'], password):
+            user = User(id=str(user_data['_id']), email=user_data['email'])
+            login_user(user)  # Store user in session
+            flash('Login successful!', 'success')
+            return redirect(url_for('index'))
         else:
-            return "Invalid login credentials"  # If credentials are incorrect
-    return render_template('login.html')  # Render login page if it's a GET request
+            flash('Invalid email or password.', 'danger')
+
+    return render_template('login.html')
+
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    # Retrieve the user from MongoDB based on user_id
+    user_data = db.users.find_one({"_id": ObjectId(user_id)})
+    if user_data:
+        return User(id=str(user_data['_id']), email=user_data['email'])
+    return None  # Return None if user not found
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('You have been logged out.', 'success')
+    return redirect(url_for('index'))
+
 
 # Register Route
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    if request.method == 'POST':  # If the request method is POST (form submission)
-        email = request.form.get('email')  # Get email from form
-        password = request.form.get('password')  # Get password from form
-        db.users.insert_one({"email": email, "password": password})  # Insert new user into the users collection
-        return redirect(url_for('login'))  # Redirect to login page after registration
-    return render_template('register.html')  # Render register page if it's a GET request
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        # Check if user already exists
+        if db.users.find_one({"email": email}):
+            flash('User already exists. Please log in.', 'warning')
+            return redirect(url_for('login'))
+
+        db.users.insert_one({"email": email, "password": password})
+        flash('Registration successful! Please log in.', 'success')
+        return redirect(url_for('login'))
+
+    return render_template('register.html')
+
 
 @app.route('/checkout', methods=['GET', 'POST'])
+@login_required
 def checkout():
     return render_template('checkout.html')
 
