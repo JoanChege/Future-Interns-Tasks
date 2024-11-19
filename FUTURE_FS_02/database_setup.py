@@ -62,10 +62,9 @@ products = [
     },
     {
         "name": "Brazilian Panties",
-        "category": "Shoes and Panties",
+        "category": "Panties",
         "price": 1000,
         "image": "panties.jpg",
-        "sizes": ["XS","S", "M", "L", "X", "XXL"],
         "types": ["Brazilian", "Cotton", "Laced"]
     }
 ]

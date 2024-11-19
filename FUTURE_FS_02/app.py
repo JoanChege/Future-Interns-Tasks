@@ -50,12 +50,7 @@ def add_to_cart():
         if not product:
             return "Product not found", 404  # Handle case if product is not found
 
-        # Validate if the size and type are available for the product
-        if size not in product['available_sizes']:
-            return f"Size '{size}' not available for this product", 400  # Size validation
 
-        if type_ not in product['available_types']:
-            return f"Type '{type_}' not available for this product", 400  # Type validation
 
         # Convert ObjectId to string before storing it in the session
         product['_id'] = str(product['_id'])  # Convert ObjectId to string

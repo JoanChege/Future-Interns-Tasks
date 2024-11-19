@@ -6,6 +6,7 @@
 <table class="table">
     <thead>
         <tr>
+            <th>Image</th>
             <th>Product</th>
             <th>Size</th>
             <th>Type</th>
@@ -19,6 +20,7 @@
         {% if cart_items %}
             {% for item in cart_items %}
             <tr>
+                <td><img src="{{ url_for('static', filename='images/' + item.image) }}" alt="{{ item.name }}" class="img-fluid" style="max-width: 100px;"></td>
                 <td>{{ item.name }}</td>
                 <td>{{ item.size }}</td>
                 <td>{{ item.type }}</td>
