@@ -87,6 +87,10 @@ body {
   background-color: #b58c00; /* Darker gold on hover */
 }
 
+.btn .btn-shop:hover{
+  color: #b58c00;
+}
+
 img {
   width: 100%;
   height: auto;
