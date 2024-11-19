@@ -16,7 +16,11 @@
             <img src="{{ url_for('static', filename='images/' + category.image) }}" class="card-img-top" alt="{{ category.name }}">
             <div class="card-body">
                 <h5 class="card-title text-dark">{{ category.name }}</h5>
-                <a href="{{ url_for('product', category=category.name) }}" class="btn" style="background-color: beige; color: burlywood;">Shop Now</a>
+                {% if current_user.is_authenticated %}
+                <a href="{{ url_for('product', category=category.name) }}" class="btn btn-shop" style="background-color: beige; color: burlywood;">Shop Now</a>
+                {% else %}
+                <a href="{{ url_for('login', category=category.name) }}" class="btn btn-shop" style="background-color: beige; color: burlywood;">Login</a>
+                {% endif %}
             </div>
         </div>
     </div>
