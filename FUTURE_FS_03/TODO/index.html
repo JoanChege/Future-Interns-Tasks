@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO APP</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>To-Do List</h1>
+            <div v-if="loggedIn">
+                <p>Welcome, {{ user.username }}</p>
+                <button @click="logout">LogOut</button>
+            </div>
+        </header>
+
+        <div v-if="!loggedIn">
+            <!--Registration-->
+            <div v-if="!loggedIn">
+                <h2>Register</h2>
+                <form @submit.prevent="register">
+                    <input type="email" v-model="newUser.email" placeholder="Enter your Email" required>
+                    <input type="text" v-model="newUser.username" placeholder="Enter your Username" required>
+                    <input type="password" v-model="newUser.password" placeholder="Enter your Password" required
+                    title="Password must have an uppercase, a lowercase, a special character, and be at least 8 characters">
+                    <button type="submit">Register</button>
+                </form>
+                <p @click="togglerForm">Already have an account? Login</p>
+            </div>
+            <!--Login-->
+            <div v-else>
+                <h2>Login</h2>
+                <form @submit.prevent="login">
+                    <input type="text" v-model="loginCredentials.username" placeholder="Enter your Username" required>
+                    <input type="password" v-model="loginCredentials.password" placeholder="Enter your Password" required>
+                    <button type="submit">Login</button>
+                </form>
+                <p @click="togglerForm">Don't have an account? Register</p>
+            </div>
+        </div>
+        <!--To-Do List-->
+        <div class="task-input">
+            <input type="text" v-model="newTask" placeholder="Add a new task">
+            <button @click="addTask">Add Task</button>
+        </div>
+        <ul>
+            <li v-for="(task, index) in tasks" :key="index">
+                <input type="checkbox" v-model="task.completed">
+                <span :class="{completed: task.completed}">{{ task.name }}</span>
+                <button @click="deleteTask(index)">Delete Task</button>
+            </li>
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="database.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
