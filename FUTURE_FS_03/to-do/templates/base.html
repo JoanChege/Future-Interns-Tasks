@@ -8,19 +8,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <title>To-Do App</title>
     <link rel="stylesheet" href="/static/styles.css">
-    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 </head>
 <body>
     <nav> 
         <a href="/">
-            <img src="/static/todo.png" alt="logo">
+            <img src="{{ url_for('static', filename='todo.png')}}" type="image/png">
         </a>
         {% if username %}
             <span>Welcome, {{ username }}!</span>
-            <a href="/logout">Logout</a>
+            <a href="/logout">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
         {% else %}
-            <a href="/login">Login</a>
-            <a href="/register">Register</a>
+            <a href="/login">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </a>
+            <a href="/register">
+                <i class="fas fa-sign-fa-sign-in-alt"></i> Register
+            </a>
         {% endif %}
     </nav>
     {% block content %}{% endblock %}
