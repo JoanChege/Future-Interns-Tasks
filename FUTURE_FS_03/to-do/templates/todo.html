@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>To-Do List</h2>
+<form method="POST" action="/add_task">
+    <input type="text" name="task" placeholder="New Task" required>
+    <input type="date" name="due_date" required>
+    <textarea name="notes" placeholder="Notes"></textarea>
+    <button type="submit">Add Task</button>
+</form>
+
+<ul>
+    {% for task in tasks %}
+        <li>
+            <span>{{ task.task }}</span> - Due: {{ task.due_date }}
+            {% if task.completed %}
+                <span>(Completed)</span>
+            {% else %}
+                <a href="/mark_complete/{{ task._id }}">Mark as Complete</a>
+            {% endif %}
+            <a href="/delete_task/{{ task._id }}">Delete</a>
+            <p>{{ task.notes }}</p>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
