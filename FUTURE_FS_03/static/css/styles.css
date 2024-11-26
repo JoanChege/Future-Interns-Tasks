@@ -6,3 +6,8 @@ body {
 h1, h2 {
     color: #182524;
 }
+
+.completed {
+    text-decoration: line-through;
+    color: gray;
+}
